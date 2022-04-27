@@ -51,6 +51,7 @@ opt.wrap = true
 opt.clipboard = "unnamed"
 opt.cursorline = true
 opt.textwidth = 120
+opt.laststatus = 3
 
 local win = vim.wo
 win.wrap = false
