@@ -84,6 +84,8 @@ vim.api.nvim_set_keymap('n', '<Leader>h', ':split<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>x', ':on<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>k', ':bd!<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>g', ':GitGutterNextHunk<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>t', ':term<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>c', ':TroubleClose<CR>', {noremap = true })
 
 
 local startup = require("packer").startup
