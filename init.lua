@@ -70,15 +70,19 @@ vim.cmd [[autocmd FileType elixir setlocal ts=2 sts=2 sw=2 expandtab]]
 vim.cmd [[tnoremap <Esc> <C-\><C-n>]]
 vim.cmd [[autocmd TermOpen * set nonu]]
 vim.cmd [[autocmd TermOpen * startinsert]]
-
 vim.cmd [[noremap <tab><tab> <C-w><C-w>]]
-vim.cmd [[map <C-p> :Files<CR>]]
-vim.cmd [[map <C-k> :bd <CR>]]
-vim.cmd [[map <C-x> :on <CR>]]
-vim.cmd [[map <C-f> :Sexplore <CR>]]
-vim.cmd [[map <C-B> :Buffers <CR>]]
 vim.cmd [[nnoremap ; :]]
 vim.cmd [[nmap <silent> ,/ :nohlsearch<CR>]]
+
+vim.g.mapleader = " "
+vim.api.nvim_set_keymap('n', '<Leader>p', ':Files<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>s', ':Ag<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>f', ':Sexplore<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>b', ':Buffers<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>v', ':vsplit<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>h', ':split<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>x', ':on<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>k', ':bd<CR>', {noremap = true })
 
 local startup = require("packer").startup
 
