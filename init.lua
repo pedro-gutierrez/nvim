@@ -51,7 +51,7 @@ opt.wrap = true
 opt.clipboard = "unnamed"
 opt.cursorline = true
 opt.textwidth = 120
-opt.laststatus = 3
+opt.laststatus = 2
 
 local win = vim.wo
 win.wrap = false
@@ -85,7 +85,7 @@ vim.api.nvim_set_keymap('n', '<Leader>x', ':%bdelete!|edit #|normal `"<CR>', {no
 vim.api.nvim_set_keymap('n', '<Leader>k', ':bd!<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>g', ':GitGutterNextHunk<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>t', ':term<CR>', {noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>c', ':TroubleClose<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>q', ':TroubleClose<CR>', {noremap = true })
 
 
 local startup = require("packer").startup
@@ -104,6 +104,7 @@ startup(function(use)
   use "brooth/far.vim"
   use "tpope/vim-fugitive"
   use "airblade/vim-gitgutter"
+  use "rust-lang/rust.vim"
 
   vim.g['gitgutter_map_keys'] = 0
   vim.g['gitgutter_override_sign_column_highlight'] = 0
