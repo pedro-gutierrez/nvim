@@ -121,6 +121,9 @@ startup(function(use)
      ['ctrl-s'] = 'split',
      ['ctrl-v'] = 'vsplit'
    }
+   vim.g['fzf_layout'] = {
+     ['down'] = '10'
+   }
 
    use {
      "folke/trouble.nvim",
