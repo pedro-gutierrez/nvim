@@ -105,6 +105,32 @@ startup(function(use)
   use "tpope/vim-fugitive"
   use "airblade/vim-gitgutter"
   use "rust-lang/rust.vim"
+  use "jbyuki/venn.nvim"
+
+  function _G.Toggle_venn()
+    local venn_enabled = vim.inspect(vim.b.venn_enabled)
+    if venn_enabled == "nil" then
+        vim.b.venn_enabled = true
+        vim.cmd[[setlocal ve=all]]
+        -- draw a line on HJKL keystokes
+        --vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "n", "<S-x>", "<C-v>j:VBox<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "n", "<S-w>", "<C-v>k:VBox<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "n", "<S-d>", "<C-v>l:VBox<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "n", "<S-a>", "<C-v>h:VBox<CR>", {noremap = true})
+        -- draw a box by pressing "f" with visual selection
+        vim.api.nvim_buf_set_keymap(0, "v", "<S-s>", ":VBox<CR>", {noremap = true})
+        print("Venn diagrams enabled")
+    else
+        vim.cmd[[setlocal ve=]]
+        vim.cmd[[mapclear <buffer>]]
+        vim.b.venn_enabled = nil
+        print("Venn diagrams disabled")
+    end
+  end
+  
+  -- toggle keymappings for venn using <leader>v
+  vim.api.nvim_set_keymap('n', '<leader>d', ":lua Toggle_venn()<CR>", { noremap = true})
 
   vim.g['gitgutter_map_keys'] = 0
   vim.g['gitgutter_override_sign_column_highlight'] = 0
