@@ -62,6 +62,10 @@ vim.cmd [[hi CursorLine cterm=none term=none]]
 vim.cmd [[hi CursorLineNr cterm=none term=none]]
 vim.cmd [[hi CursorLine ctermbg=none]]
 
+vim.cmd [[hi fzf1 ctermbg=black ctermfg=white]]
+vim.cmd [[hi fzf2 ctermbg=black ctermfg=white]]
+vim.cmd [[hi fzf3 ctermbg=black ctermfg=white]]
+
 vim.cmd [[autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete]]
 vim.cmd [[autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab]]
 vim.cmd [[autocmd FileType lua setlocal ts=2 sts=2 sw=2 expandtab]]
