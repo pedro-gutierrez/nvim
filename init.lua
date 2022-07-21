@@ -97,6 +97,7 @@ local startup = require("packer").startup
 startup(function(use)
   
   use "airblade/vim-rooter"
+  use "williamboman/nvim-lsp-installer"
   use "neovim/nvim-lspconfig"
   use "hrsh7th/nvim-compe"
   use "hrsh7th/vim-vsnip"
@@ -109,7 +110,9 @@ startup(function(use)
   use "tpope/vim-fugitive"
   use "airblade/vim-gitgutter"
   use "rust-lang/rust.vim"
-  use "jbyuki/venn.nvim"
+  use "fatih/vim-go"
+
+  vim.cmd [[autocmd FileType elixir setlocal commentstring=#\ %s]]
 
   function _G.Toggle_venn()
     local venn_enabled = vim.inspect(vim.b.venn_enabled)
@@ -129,9 +132,6 @@ startup(function(use)
         print("Venn diagrams disabled")
     end
   end
-  
-  -- toggle keymappings for venn using <leader>v
-  vim.api.nvim_set_keymap('n', '<leader>d', ":lua Toggle_venn()<CR>", { noremap = true})
 
   vim.g['gitgutter_map_keys'] = 0
   vim.g['gitgutter_override_sign_column_highlight'] = 0
