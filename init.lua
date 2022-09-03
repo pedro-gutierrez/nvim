@@ -95,7 +95,7 @@ vim.api.nvim_set_keymap('n', '<Leader>q', ':TroubleClose<CR>', {noremap = true }
 local startup = require("packer").startup
 
 startup(function(use)
-  
+
   use "airblade/vim-rooter"
   use "williamboman/nvim-lsp-installer"
   use "neovim/nvim-lspconfig"
@@ -109,6 +109,7 @@ startup(function(use)
   use "brooth/far.vim"
   use "tpope/vim-fugitive"
   use "airblade/vim-gitgutter"
+  use "ntpeters/vim-better-whitespace"
   use "rust-lang/rust.vim"
   use "fatih/vim-go"
 
