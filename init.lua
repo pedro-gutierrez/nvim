@@ -41,17 +41,18 @@ opt.undolevels = 1000
 opt.wildignore = "*.swp,*.bak,*.pyc,*.class"
 opt.title = true
 opt.visualbell = true
-opt.errorbells = false 
-opt.backup = false 
-opt.swapfile = false 
-opt.softtabstop = 4 
+opt.errorbells = false
+opt.backup = false
+opt.swapfile = false
+opt.softtabstop = 4
 opt.expandtab = true
 opt.shortmess:append("c")
-opt.wrap = true 
+opt.wrap = true
 opt.clipboard = "unnamed"
 opt.cursorline = true
 opt.textwidth = 120
 opt.laststatus = 2
+opt.timeoutlen = 300
 
 local win = vim.wo
 win.wrap = false
@@ -77,62 +78,56 @@ vim.cmd [[autocmd TermOpen * startinsert]]
 vim.cmd [[noremap <tab><tab> <C-w><C-w>]]
 vim.cmd [[nnoremap ; :]]
 vim.cmd [[nmap <silent> ,/ :nohlsearch<CR>]]
+vim.cmd [[command! EditConfig edit ~/.config/nvim/init.lua]]
+vim.cmd [[command! KillBuffer bd!]]
+vim.cmd [[command! KillOtherBuffers %bdelete!|edit #|normal `"]]
+vim.cmd [[command! VerticalSplit vsplit]]
+vim.cmd [[command! HorizontalSplit vsplit]]
+vim.cmd [[command! OpenTerminal term]]
+vim.cmd [[command! ExploreFiles Sexplore]]
+vim.cmd [[command! SearchFiles Ag]]
+vim.cmd [[command! CloseWindow q]]
 
 vim.g.mapleader = " "
 vim.api.nvim_set_keymap('n', '<Leader>p', ':Files<CR>', {noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>s', ':Ag<CR>', {noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>f', ':Sexplore<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>s', ':SearchFiles<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>f', ':ExploreFiles<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>b', ':Buffers<CR>', {noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>v', ':vsplit<CR>', {noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>h', ':split<CR>', {noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>x', ':%bdelete!|edit #|normal `"<CR>', {noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>c', ':bd!<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>v', ':VerticalSplit<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>h', ':HorizontalSplit<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>x', ':KillOtherBuffers<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>c', ':CloseWindow<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>k', ':KillBuffer<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>g', ':GitGutterNextHunk<CR>', {noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>t', ':term<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>t', ':OpenTerminal<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>q', ':TroubleClose<CR>', {noremap = true })
-
+vim.api.nvim_set_keymap('n', '<Leader>.', ':EditConfig<CR>', {noremap = true })
 
 local startup = require("packer").startup
 
 startup(function(use)
 
-  use "airblade/vim-rooter"
-  use "williamboman/nvim-lsp-installer"
-  use "neovim/nvim-lspconfig"
-  use "hrsh7th/nvim-compe"
-  use "hrsh7th/vim-vsnip"
-  use "hrsh7th/vim-vsnip-integ"
-  use "nvim-treesitter/nvim-treesitter"
-  use "junegunn/fzf"
-  use "junegunn/fzf.vim"
-  use "ojroques/nvim-lspfuzzy"
-  use "brooth/far.vim"
-  use "tpope/vim-fugitive"
-  use "airblade/vim-gitgutter"
-  use "ntpeters/vim-better-whitespace"
-  use "rust-lang/rust.vim"
-  use "fatih/vim-go"
+    use "airblade/vim-rooter"
+    use "williamboman/nvim-lsp-installer"
+    use "neovim/nvim-lspconfig"
+    use "hrsh7th/nvim-compe"
+    use "hrsh7th/vim-vsnip"
+    use "hrsh7th/vim-vsnip-integ"
+    use "nvim-treesitter/nvim-treesitter"
+    use "junegunn/fzf"
+    use "junegunn/fzf.vim"
+    use "ojroques/nvim-lspfuzzy"
+    use "brooth/far.vim"
+    use "tpope/vim-fugitive"
+    use "airblade/vim-gitgutter"
+    use "ntpeters/vim-better-whitespace"
+    use "rust-lang/rust.vim"
+    use "fatih/vim-go"
+    use "folke/which-key.nvim"
+
+    require("which-key").setup {}
 
   vim.cmd [[autocmd FileType elixir setlocal commentstring=#\ %s]]
-
-  function _G.Toggle_venn()
-    local venn_enabled = vim.inspect(vim.b.venn_enabled)
-    if venn_enabled == "nil" then
-        vim.b.venn_enabled = true
-        vim.cmd[[setlocal ve=all]]
-        vim.api.nvim_buf_set_keymap(0, "n", "<S-x>", "<C-v>j:VBox<CR>", {noremap = true}) --down
-        vim.api.nvim_buf_set_keymap(0, "n", "<S-w>", "<C-v>k:VBox<CR>", {noremap = true}) --up
-        vim.api.nvim_buf_set_keymap(0, "n", "<S-d>", "<C-v>l:VBox<CR>", {noremap = true}) --right
-        vim.api.nvim_buf_set_keymap(0, "n", "<S-a>", "<C-v>h:VBox<CR>", {noremap = true}) --left
-        vim.api.nvim_buf_set_keymap(0, "v", "<S-s>", ":VBox<CR>", {noremap = true})
-        print("Venn diagrams enabled")
-    else
-        vim.cmd[[setlocal ve=]]
-        vim.cmd[[mapclear <buffer>]]
-        vim.b.venn_enabled = nil
-        print("Venn diagrams disabled")
-    end
-  end
 
   vim.g['gitgutter_map_keys'] = 0
   vim.g['gitgutter_override_sign_column_highlight'] = 0
@@ -175,7 +170,7 @@ startup(function(use)
    }
 
    require'nvim-treesitter.configs'.setup {
-         ensure_installed = { "elixir", "erlang", "go", "python", "json", "javascript", "yaml" }, 
+         ensure_installed = { "elixir", "erlang", "go", "python", "json", "javascript", "yaml", "hcl" },
          highlight = { enable = true },
          indent = { enable = true },
          incremental_selection = { enable = true },
@@ -256,5 +251,14 @@ startup(function(use)
  	  }
    })
 
+    vim.cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
+    vim.cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]])
+    vim.cmd([[autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl]])
+    vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]])
+    vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
+    vim.cmd([[let g:terraform_fmt_on_save=1]])
+    vim.cmd([[let g:terraform_align=1]])
 
+    require'lspconfig'.terraformls.setup{}
+    require'lspconfig'.tflint.setup{}
 end)
