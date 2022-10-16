@@ -82,7 +82,7 @@ vim.cmd [[command! EditConfig edit ~/.config/nvim/init.lua]]
 vim.cmd [[command! KillBuffer bd!]]
 vim.cmd [[command! KillOtherBuffers %bdelete!|edit #|normal `"]]
 vim.cmd [[command! VerticalSplit vsplit]]
-vim.cmd [[command! HorizontalSplit vsplit]]
+vim.cmd [[command! HorizontalSplit split]]
 vim.cmd [[command! OpenTerminal term]]
 vim.cmd [[command! ExploreFiles Sexplore]]
 vim.cmd [[command! SearchFiles Ag]]
@@ -102,6 +102,8 @@ vim.api.nvim_set_keymap('n', '<Leader>g', ':GitGutterNextHunk<CR>', {noremap = t
 vim.api.nvim_set_keymap('n', '<Leader>t', ':OpenTerminal<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>q', ':TroubleClose<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>.', ':EditConfig<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>m', ':Startify<CR>', {noremap = true })
+
 
 local startup = require("packer").startup
 
@@ -123,11 +125,10 @@ startup(function(use)
     use "ntpeters/vim-better-whitespace"
     use "rust-lang/rust.vim"
     use "fatih/vim-go"
-    use "folke/which-key.nvim"
+    use "mhinz/vim-startify"
+    use 'pedro-gutierrez/nvim-hardline'
 
-    require("which-key").setup {}
-
-  vim.cmd [[autocmd FileType elixir setlocal commentstring=#\ %s]]
+    require('hardline').setup {}
 
   vim.g['gitgutter_map_keys'] = 0
   vim.g['gitgutter_override_sign_column_highlight'] = 0
@@ -182,7 +183,7 @@ startup(function(use)
    local lspconfig = require("lspconfig")
    local capabilities = vim.lsp.protocol.make_client_capabilities()
    capabilities.textDocument.completion.completionItem.snippetSupport = true
-  
+
      vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
          vim.lsp.diagnostic.on_publish_diagnostics, {
              underline = false,
@@ -193,63 +194,63 @@ startup(function(use)
      )
 
    require "compe".setup {
- 	  enabled = true,
- 	  autocomplete = true,
- 	  debug = false,
- 	  min_length = 1,
- 	  preselect = "disabled",
- 	  throttle_time = 80,
- 	  source_timeout = 200,
- 	  incomplete_delay = 400,
- 	  max_abbr_width = 100,
- 	  max_kind_width = 100,
- 	  max_menu_width = 100,
- 	  documentation = true,
- 	  source = {
- 		  path = true,
- 		  buffer = true,
- 		  calc = true,
- 		  vsnip = true,
- 		  nvim_lsp = true,
- 		  nvim_lua = true,
- 		  spell = true,
- 		  tags = true,
- 		  treesitter = true
- 	  }
+        enabled = true,
+        autocomplete = true,
+        debug = false,
+        min_length = 1,
+        preselect = "disabled",
+        throttle_time = 80,
+        source_timeout = 200,
+        incomplete_delay = 400,
+        max_abbr_width = 100,
+        max_kind_width = 100,
+        max_menu_width = 100,
+        documentation = true,
+        source = {
+            path = true,
+            buffer = true,
+            calc = true,
+            vsnip = true,
+            nvim_lsp = true,
+            nvim_lua = true,
+            spell = true,
+            tags = true,
+            treesitter = true
+        }
    }
 
    local on_attach = function(_, bufnr)
     local map_opts = {noremap = true, silent = true}
 
- 	  vim.api.nvim_buf_set_keymap(bufnr, "n", "df", "<cmd>lua vim.lsp.buf.formatting()<cr>", map_opts)
- 	  vim.api.nvim_buf_set_keymap(bufnr, "n", "gld", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", map_opts)
- 	  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", map_opts)
- 	  vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
- 	  vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.implementation()<cr>", map_opts)
- 	  vim.api.nvim_buf_set_keymap(bufnr, "n", "<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", map_opts)
- 	  vim.api.nvim_buf_set_keymap(bufnr, "n", "1gD", "<cmd>lua vim.lsp.buf.type_definition()<cr>", map_opts)
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "df", "<cmd>lua vim.lsp.buf.formatting()<cr>", map_opts)
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "gld", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", map_opts)
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", map_opts)
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.implementation()<cr>", map_opts)
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", map_opts)
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "1gD", "<cmd>lua vim.lsp.buf.type_definition()<cr>", map_opts)
 
- 	  vim.cmd [[inoremap <silent><expr> <C-Space> compe#complete()]]
- 	  vim.cmd [[inoremap <silent><expr> <CR> compe#confirm('<CR>')]]
- 	  vim.cmd [[inoremap <silent><expr> <C-e> compe#close('<C-e>')]]
- 	  vim.cmd [[inoremap <silent><expr> <C-f> compe#scroll({ 'delta': +4 })]]
- 	  vim.cmd [[inoremap <silent><expr> <C-d> compe#scroll({ 'delta': -4 })]]
+        vim.cmd [[inoremap <silent><expr> <C-Space> compe#complete()]]
+        vim.cmd [[inoremap <silent><expr> <CR> compe#confirm('<CR>')]]
+        vim.cmd [[inoremap <silent><expr> <C-e> compe#close('<C-e>')]]
+        vim.cmd [[inoremap <silent><expr> <C-f> compe#scroll({ 'delta': +4 })]]
+        vim.cmd [[inoremap <silent><expr> <C-d> compe#scroll({ 'delta': -4 })]]
 
- 	  vim.api.nvim_command [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
- 	  -- vim.api.nvim_command [[autocmd CursorHold  * lua vim.lsp.diagnostic.show_line_diagnostics()]]
+        vim.api.nvim_command [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
+        -- vim.api.nvim_command [[autocmd CursorHold  * lua vim.lsp.diagnostic.show_line_diagnostics()]]
    end
 
-   lspconfig.elixirls.setup({
- 	  cmd = { vim.fn.expand('~/Projects/elixir-ls/language_server.sh') },
- 	  capabilities = capabilities,
- 	  on_attach = on_attach,
- 	  settings = {
- 		  elixirLS = {
- 			  dialyzerEnabled = false,
- 			  fetchDeps = false
- 		  }
- 	  }
-   })
+    lspconfig.elixirls.setup({
+        cmd = { vim.fn.expand('~/Projects/elixir-ls/language_server.sh') },
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+            elixirLS = {
+                dialyzerEnabled = false,
+                fetchDeps = false
+            }
+        }
+    })
 
     vim.cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
     vim.cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]])
