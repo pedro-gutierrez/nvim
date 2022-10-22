@@ -86,7 +86,6 @@ vim.cmd [[command! HorizontalSplit split]]
 vim.cmd [[command! OpenTerminal term]]
 vim.cmd [[command! ExploreFiles Sexplore]]
 vim.cmd [[command! SearchFiles Ag]]
-vim.cmd [[command! CloseWindow q]]
 
 vim.g.mapleader = " "
 vim.api.nvim_set_keymap('n', '<Leader>p', ':Files<CR>', {noremap = true })
@@ -96,7 +95,7 @@ vim.api.nvim_set_keymap('n', '<Leader>b', ':Buffers<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>v', ':VerticalSplit<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>h', ':HorizontalSplit<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>x', ':KillOtherBuffers<CR>', {noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>c', ':CloseWindow<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>r', ':SReplace<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>k', ':KillBuffer<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>g', ':GitGutterNextHunk<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>t', ':OpenTerminal<CR>', {noremap = true })
@@ -127,8 +126,20 @@ startup(function(use)
     use "fatih/vim-go"
     use "mhinz/vim-startify"
     use 'pedro-gutierrez/nvim-hardline'
+    use 's1n7ax/nvim-search-and-replace'
 
     require('hardline').setup {}
+    require('nvim-search-and-replace').setup({
+        ignore = {
+            '**/node_modules/**',
+            '**/.git/**',
+            '**/.gitignore',
+            '**/.gitmodules',
+            '**/build/**',
+            '**/deps/**',
+            '**/_build/**'
+        }
+    })
 
   vim.g['gitgutter_map_keys'] = 0
   vim.g['gitgutter_override_sign_column_highlight'] = 0
