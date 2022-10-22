@@ -81,6 +81,7 @@ vim.cmd [[noremap <tab><tab> <C-w><C-w>]]
 vim.cmd [[nnoremap ; :]]
 vim.cmd [[nmap <silent> ,/ :nohlsearch<CR>]]
 vim.cmd [[command! EditConfig edit ~/.config/nvim/init.lua]]
+vim.cmd [[command! CloseWindow q]]
 vim.cmd [[command! KillBuffer bd!]]
 vim.cmd [[command! KillOtherBuffers %bdelete!|edit #|normal `"]]
 vim.cmd [[command! VerticalSplit vsplit]]
@@ -99,6 +100,7 @@ vim.api.nvim_set_keymap('n', '<Leader>h', ':HorizontalSplit<CR>', {noremap = tru
 vim.api.nvim_set_keymap('n', '<Leader>x', ':KillOtherBuffers<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>r', ':SReplace<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>k', ':KillBuffer<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>w', ':CloseWindow<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>g', ':GitGutterNextHunk<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>t', ':OpenTerminal<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>q', ':TroubleClose<CR>', {noremap = true })
