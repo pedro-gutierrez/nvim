@@ -265,24 +265,9 @@ startup(function(use)
         }
     })
 
-    vim.cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
-    vim.cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]])
-    vim.cmd([[autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl]])
-    vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]])
-    vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
-    vim.cmd([[let g:terraform_fmt_on_save=1]])
-    vim.cmd([[let g:terraform_align=1]])
-
-    require'lspconfig'.terraformls.setup{}
-    require'lspconfig'.tflint.setup{}
-
     -- Remove trailing whitespaces from files before saving
     vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         pattern = { "*" },
         command = [[%s/\s\+$//e]],
     })
-
-    local terminal_options = function()
-        echo("plop")
-    end
 end)
