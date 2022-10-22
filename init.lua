@@ -112,9 +112,8 @@ startup(function(use)
     use "williamboman/nvim-lsp-installer"
     use "neovim/nvim-lspconfig"
     use "hrsh7th/nvim-compe"
-    use "hrsh7th/vim-vsnip"
-    use "hrsh7th/vim-vsnip-integ"
-    use "nvim-treesitter/nvim-treesitter"
+    -- use "nvim-treesitter/nvim-treesitter"
+    use {'nvim-treesitter/nvim-treesitter', commit = 'addc129a4f272aba0834bd0a7b6bd4ad5d8c801b', lock = true, run = ':TSUpdate'}
     use "junegunn/fzf"
     use "junegunn/fzf.vim"
     use "ojroques/nvim-lspfuzzy"
