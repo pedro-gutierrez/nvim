@@ -257,6 +257,7 @@ startup(function(use)
         on_attach = on_attach,
         settings = {
             elixirLS = {
+                mixTarget = 'dev',
                 dialyzerEnabled = false,
                 fetchDeps = false
             }
