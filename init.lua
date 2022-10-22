@@ -141,13 +141,13 @@ startup(function(use)
         }
     })
 
-  vim.g['gitgutter_map_keys'] = 0
-  vim.g['gitgutter_override_sign_column_highlight'] = 0
-  -- vim.cmd [[highlight clear SignColumn]]
-  vim.cmd [[highlight GitGutterAdd ctermfg=2]]
-  vim.cmd [[highlight GitGutterChange ctermfg=3]]
-  vim.cmd [[highlight GitGutterDelete ctermfg=1]]
-  vim.cmd [[highlight GitGutterChangeDelete ctermfg=4]]
+    vim.g['gitgutter_map_keys'] = 0
+    vim.g['gitgutter_override_sign_column_highlight'] = 0
+    -- vim.cmd [[highlight clear SignColumn]]
+    vim.cmd [[highlight GitGutterAdd ctermfg=2]]
+    vim.cmd [[highlight GitGutterChange ctermfg=3]]
+    vim.cmd [[highlight GitGutterDelete ctermfg=1]]
+    vim.cmd [[highlight GitGutterChangeDelete ctermfg=4]]
 
 
    vim.g['fzf_preview_window'] = {}
