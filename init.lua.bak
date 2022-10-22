@@ -75,8 +75,6 @@ vim.cmd [[autocmd FileType elixir setlocal ts=2 sts=2 sw=2 expandtab]]
 vim.cmd [[tnoremap <Esc> <C-\><C-n>]]
 vim.cmd [[autocmd TermOpen * set nonu]]
 vim.cmd [[autocmd TermOpen * startinsert]]
-vim.cmd [[autocmd TermOpen * :DisableWhitespace]]
-vim.cmd [[autocmd TermClose * q]]
 vim.cmd [[noremap <tab><tab> <C-w><C-w>]]
 vim.cmd [[nnoremap ; :]]
 vim.cmd [[nmap <silent> ,/ :nohlsearch<CR>]]
@@ -94,7 +92,7 @@ vim.api.nvim_set_keymap('n', '<Leader>p', ':Files<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>s', ':SearchFiles<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>f', ':ExploreFiles<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>b', ':Buffers<CR>', {noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>v', ':VerticalSplit<CR><C-w><C-w>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>v', ':VerticalSplit<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>h', ':HorizontalSplit<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>x', ':KillOtherBuffers<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>r', ':SReplace<CR>', {noremap = true })
@@ -281,8 +279,4 @@ startup(function(use)
         pattern = { "*" },
         command = [[%s/\s\+$//e]],
     })
-
-    local terminal_options = function()
-        echo("plop")
-    end
 end)
