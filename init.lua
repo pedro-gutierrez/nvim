@@ -273,4 +273,10 @@ startup(function(use)
 
     require'lspconfig'.terraformls.setup{}
     require'lspconfig'.tflint.setup{}
+
+    -- Remove trailing whitespaces from files before saving
+    vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+        pattern = { "*" },
+        command = [[%s/\s\+$//e]],
+    })
 end)
