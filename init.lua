@@ -76,7 +76,7 @@ vim.cmd [[tnoremap <Esc> <C-\><C-n>]]
 vim.cmd [[autocmd TermOpen * set nonu]]
 vim.cmd [[autocmd TermOpen * startinsert]]
 vim.cmd [[autocmd TermOpen * :DisableWhitespace]]
-vim.cmd [[autocmd TermClose * q]]
+vim.cmd [[autocmd TermClose * call feedkeys("i")]]
 vim.cmd [[noremap <tab><tab> <C-w><C-w>]]
 vim.cmd [[nnoremap ; :]]
 vim.cmd [[nmap <silent> ,/ :nohlsearch<CR>]]
@@ -102,6 +102,7 @@ vim.api.nvim_set_keymap('n', '<Leader>r', ':SReplace<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>k', ':KillBuffer<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>w', ':CloseWindow<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>g', ':GitGutterNextHunk<CR>', {noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>gp', ':GitGutterPreviewHunk<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>t', ':OpenTerminal<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>q', ':TroubleClose<CR>', {noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>.', ':EditConfig<CR>', {noremap = true })
