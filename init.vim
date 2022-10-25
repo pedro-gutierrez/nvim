@@ -16,7 +16,6 @@ Plug 's1n7ax/nvim-search-and-replace'
 call plug#end()
 
 let g:indent_blankline_char = '┊'
-
 set updatetime=250
 set background=light
 set hidden
@@ -94,7 +93,7 @@ autocmd FileType elixir setlocal makeprg=mix\ compile\ --warnings-as-errors
 function! MixFormat()
     let l = line(".")
     let c = col(".")
-    %!mix format -
+    silent %!mix format -
     if v:shell_error == 1
         undo
     endif
@@ -102,11 +101,7 @@ function! MixFormat()
 endfun
 
 autocmd FileType elixir autocmd BufWritePre <buffer> :call MixFormat()
-autocmd FileType elixir autocmd BufWritePost <buffer> silent make
-
-"" Automatically show the QuickFix window on errors
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost    l* nested lwindow
+autocmd FileType elixir autocmd BufWritePost <buffer> :lua async_make()
 
 "" Key mappings and custom commands
 let mapleader=' '
@@ -155,21 +150,6 @@ hi GitGutterChangeDelete ctermfg=4
 
 hi! link TSSymbol TSConstant
 
-function! QF_signs() abort
-    call sign_define('QFErr',{'text':'E','texthl':'NONE','linehl':'NONE'})
-    call sign_unplace('*')
-    let s:qfl = getqflist()
-    for item in s:qfl
-        call sign_place(0, '', 'QFErr', item.bufnr, {'lnum': item.lnum})
-    endfor
-endfunction
-
-augroup quickfix
-    autocmd!
-    autocmd QuickFixCmdPost [^l]* cwindow | call QF_signs()
-    autocmd QuickFixCmdPost l* lwindow | call QF_signs()
-augroup END
-
 lua <<EOF
 require('hardline').setup {}
 require('nvim-search-and-replace').setup {
@@ -217,4 +197,59 @@ require "compe".setup {
         treesitter = true
     }
 }
+
+local function has_non_whitespace(str)
+  return str:match("[^%s]")
+end
+
+local function fill_qflist(lines)
+  vim.fn.setqflist({}, "a", {
+    title = vim.bo.makeprg,
+    lines = vim.tbl_filter(has_non_whitespace, lines),
+  })
+
+  vim.api.nvim_command("cwindow")
+end
+
+local function onread(err, data)
+  if err then
+    local echoerr = "echoerr '%s'"
+    vim.api.nvim_command(echoerr:format(err))
+  elseif data then
+    local lines = vim.split(data, "\n")
+    fill_qflist(lines)
+  end
+end
+
+function async_make()
+  local makeprg = vim.bo.makeprg
+  local cmd = vim.fn.expandcmd(makeprg)
+  local program, args = string.match(cmd, "([^%s]+)%s(.+)")
+
+  local stdout = vim.loop.new_pipe(false)
+  local stderr = vim.loop.new_pipe(false)
+
+  handle, pid = vim.loop.spawn(program, {
+    args = vim.split(args, ' '),
+    stdio = { stdout, stderr }
+  },
+  function(code, signal)
+    stdout:read_stop()
+    stdout:close()
+    stderr:read_stop()
+    stderr:close()
+    handle:close()
+  end
+  )
+
+  if vim.fn.getqflist({title = ''}).title == makeprg then
+    vim.fn.setqflist({}, "r")
+  else
+    vim.fn.setqflist({}, " ")
+  end
+
+  stderr:read_start(vim.schedule_wrap(onread))
+  stdout:read_start(vim.schedule_wrap(onread))
+end
+
 EOF
