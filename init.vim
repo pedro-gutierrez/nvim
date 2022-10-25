@@ -21,11 +21,12 @@ set updatetime=250
 set background=light
 set hidden
 set number
-set tabstop=8
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set backspace=indent,eol,start
 set autoindent
 set copyindent
-set shiftwidth=4
 set shiftround
 set showmatch
 set ignorecase
@@ -41,7 +42,6 @@ set visualbell
 set errorbells
 set nobackup
 set noswapfile
-set softtabstop=4
 set expandtab
 set shortmess+=c
 set wrap
@@ -50,50 +50,74 @@ set cursorline
 set textwidth=120
 set laststatus=2
 set timeoutlen=300
-set lazyredraw
 
+"" Error format
+set errorformat=\%C%f:%l
+set errorformat+=\%E==\ Compilation\ error\ in\ file\ %f\ ==
+set errorformat+=\%Wwarning:\ %m
+set errorformat+=%Z%f:%l:
+set errorformat+=%Z\ \ %f:%l
+set errorformat+=%Z\ \ %f:%l:%.%#
+set errorformat+=\%C**\ (%\\w%\\+)\ %f:%l:\ %m
+set errorformat+=\%C**\ (%\\w%\\+)\ %m
+set errorformat+=%-G%.%#
 
-hi VertSplit cterm=NONE
+"" Vertical split divider
 set fillchars+=vert:\|
+hi VertSplit cterm=NONE
+
+"" Cursor line
 hi CursorLine cterm=none term=none
 hi CursorLineNr cterm=none term=none
 hi CursorLine ctermbg=none
-"
 
+"" FZF
 hi fzf1 ctermbg=black ctermfg=white
 hi fzf2 ctermbg=black ctermfg=white
 hi fzf3 ctermbg=black ctermfg=white
 
+let g:fzf_preview_window = {}
+let g:fzf_layout = { 'down': '10'}
+
+"" Makefiles
+autocmd FileType make setlocal noexpandtab shiftwidth=0 tabstop=8 softtabstop=0 smarttab
+
+"" Remove trailing whitespaces before saving files
 autocmd FileType * autocmd BufWritePre <buffer> %s/\s\+$//e
+
+"" Some git stuff I don't remember
 autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType lua setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType elixir setlocal ts=2 sts=2 sw=2 expandtab
+
+"" Elixir
 autocmd FileType elixir setlocal makeprg=mix\ compile\ --warnings-as-errors
-autocmd FileType elixir setlocal errorformat=\%C%f:%l
-autocmd FileType elixir setlocal errorformat+=\%E==\ Compilation\ error\ in\ file\ %f\ ==
-autocmd FileType elixir setlocal errorformat+=\%Wwarning:\ %m
-autocmd FileType elixir setlocal errorformat+=%Z%f:%l:
-autocmd FileType elixir setlocal errorformat+=%Z\ \ %f:%l
-autocmd FileType elixir setlocal errorformat+=%Z\ \ %f:%l:%.%#
-autocmd FileType elixir setlocal errorformat+=\%C**\ (%\\w%\\+)\ %f:%l:\ %m
-autocmd FileType elixir setlocal errorformat+=\%C**\ (%\\w%\\+)\ %m
-autocmd FileType elixir setlocal errorformat+=%-G%.%#
-autocmd FileType elixir autocmd BufWritePre <buffer> %!mix format -
+
+function! MixFormat()
+    let l = line(".")
+    let c = col(".")
+    %!mix format -
+    if v:shell_error == 1
+        undo
+    endif
+    call cursor(l, c)
+endfun
+
+autocmd FileType elixir autocmd BufWritePre <buffer> :call MixFormat()
 autocmd FileType elixir autocmd BufWritePost <buffer> silent make
 
+"" Automatically show the QuickFix window on errors
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
+"" Key mappings and custom commands
+let mapleader=' '
 tnoremap <Esc> <C-\><C-n>
 autocmd TermOpen * set nonu
-autocmd TermOpen * startinsert
 autocmd TermOpen * :DisableWhitespace
-autocmd TermClose * call feedkeys("i")
+"" autocmd TermClose * call feedkeys("i")
 noremap <tab><tab> <C-w><C-w>
 nnoremap ; :
 nmap <silent> ,/ :nohlsearch<CR>
-command! EditConfig edit ~/.config/nvim/init.lua
+command! EditConfig edit ~/.config/nvim/init.vim
 command! CloseWindow q
 command! KillBuffer bd!
 command! KillOtherBuffers %bdelete!|edit #|normal `"
@@ -102,8 +126,6 @@ command! HorizontalSplit split
 command! OpenTerminal term
 command! ExploreFiles Sexplore
 command! SearchFiles Ag
-
-let mapleader=' '
 
 nnoremap <Leader>p :Files<CR>
 nnoremap <Leader>s :SearchFiles<CR>
@@ -118,10 +140,11 @@ nnoremap <Leader>w :CloseWindow<CR>
 nnoremap <Leader>g :GitGutterNextHunk<CR>
 nnoremap <Leader>gp :GitGutterPreviewHunk<CR>
 nnoremap <Leader>t :OpenTerminal<CR>
-nnoremap <Leader>q :TroubleClose<CR>
+nnoremap <Leader>q :cclose<CR>
 nnoremap <Leader>. :EditConfig<CR>
 nnoremap <Leader>m :Startify<CR>
 
+"" Git Gutter
 let g:gitgutter_map_keys = 0
 let g:gitgutter_override_sign_column_highlight = 0
 hi GitGutterAdd ctermfg=2
@@ -130,8 +153,22 @@ hi GitGutterDelete ctermfg=1
 hi GitGutterChangeDelete ctermfg=4
 
 
-let g:fzf_preview_window = {}
-let g:fzf_layout = { 'down': '10'}
+hi! link TSSymbol TSConstant
+
+function! QF_signs() abort
+    call sign_define('QFErr',{'text':'E','texthl':'NONE','linehl':'NONE'})
+    call sign_unplace('*')
+    let s:qfl = getqflist()
+    for item in s:qfl
+        call sign_place(0, '', 'QFErr', item.bufnr, {'lnum': item.lnum})
+    endfor
+endfunction
+
+augroup quickfix
+    autocmd!
+    autocmd QuickFixCmdPost [^l]* cwindow | call QF_signs()
+    autocmd QuickFixCmdPost l* lwindow | call QF_signs()
+augroup END
 
 lua <<EOF
 require('hardline').setup {}
@@ -181,5 +218,3 @@ require "compe".setup {
     }
 }
 EOF
-
-hi! link TSSymbol TSConstant
