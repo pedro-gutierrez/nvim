@@ -23,11 +23,12 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'L3MON4D3/LuaSnip'
+  use 'rrethy/vim-illuminate'
 
-  use {'nvim-treesitter/nvim-treesitter',
+  use { 'nvim-treesitter/nvim-treesitter',
     commit = 'addc129a4f272aba0834bd0a7b6bd4ad5d8c801b',
     lock = true,
-    run = ':TSUpdate'}
+    run = ':TSUpdate' }
 
   require("project_nvim").setup {}
 
@@ -42,4 +43,6 @@ return require('packer').startup(function(use)
       '**/_build/**'
     }
   })
+
+  require('illuminate').configure {}
 end)
