@@ -6,7 +6,7 @@
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'tpope/vim-fugitive'
-  use 'ahmedkhalf/project.nvim'
+  --use 'ahmedkhalf/project.nvim'
   use "junnplus/lsp-setup.nvim"
   use "williamboman/mason.nvim"
   use "williamboman/mason-lspconfig.nvim"
@@ -30,7 +30,7 @@ return require('packer').startup(function(use)
     lock = true,
     run = ':TSUpdate' }
 
-  require("project_nvim").setup {}
+  --require("project_nvim").setup {}
 
   require('nvim-search-and-replace').setup({
     ignore = {
@@ -45,4 +45,8 @@ return require('packer').startup(function(use)
   })
 
   require('illuminate').configure {}
+
+  -- these will only be used by my iterm
+  use 'navarasu/onedark.nvim'
+  use 'nvim-lualine/lualine.nvim'
 end)
