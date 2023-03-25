@@ -6,7 +6,7 @@
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'tpope/vim-fugitive'
-  --use 'ahmedkhalf/project.nvim'
+  use 'ahmedkhalf/project.nvim'
   use "junnplus/lsp-setup.nvim"
   use "williamboman/mason.nvim"
   use "williamboman/mason-lspconfig.nvim"
@@ -23,14 +23,13 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'L3MON4D3/LuaSnip'
-  use 'rrethy/vim-illuminate'
 
   use { 'nvim-treesitter/nvim-treesitter',
     commit = 'addc129a4f272aba0834bd0a7b6bd4ad5d8c801b',
     lock = true,
     run = ':TSUpdate' }
 
-  --require("project_nvim").setup {}
+  require("project_nvim").setup {}
 
   require('nvim-search-and-replace').setup({
     ignore = {
@@ -44,7 +43,15 @@ return require('packer').startup(function(use)
     }
   })
 
+  -- illuminate
+  use 'rrethy/vim-illuminate'
   require('illuminate').configure {}
+
+  -- testing
+  use 'vim-test/vim-test'
+  vim.g['test#strategy'] = 'neovim'
+  vim.g['test#neovim#term_position'] = 'bot'
+
 
   -- these will only be used by my iterm
   use 'navarasu/onedark.nvim'
