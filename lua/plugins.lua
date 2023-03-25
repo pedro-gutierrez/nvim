@@ -56,4 +56,5 @@ return require('packer').startup(function(use)
   -- these will only be used by my iterm
   use 'navarasu/onedark.nvim'
   use 'nvim-lualine/lualine.nvim'
+  use 'ellisonleao/gruvbox.nvim'
 end)
