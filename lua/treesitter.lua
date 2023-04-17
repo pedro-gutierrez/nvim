@@ -1,4 +1,4 @@
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
   ensure_installed = {
     "elixir",
     "erlang",
@@ -13,7 +13,9 @@ require'nvim-treesitter.configs'.setup {
   highlight = { enable = true },
   indent = { enable = true },
   incremental_selection = { enable = true },
-  textobjects = { enable = false },
+  textobjects = { enable = true },
 }
 
-vim.cmd [[highlight! link TSSymbol TSConstant]]
+vim.api.nvim_set_hl(0, "@variable.elixir", { link = "None" })
+vim.api.nvim_set_hl(0, "@symbol.elixir", { link = "String" })
+-- vim.cmd [[highlight! link TSSymbol TSConstant]]

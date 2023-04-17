@@ -7,11 +7,11 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 local h = 'textDocument/publishDiagnostics'
 vim.lsp.handlers[h] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-  underline = true,
-  virtual_text = false,
-  signs = true,
-  update_in_insert = true
-})
+    underline = true,
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true
+  })
 
 function Quickfixlist()
   local current = vim.api.nvim_get_current_win()
@@ -37,11 +37,13 @@ require('lsp-setup').setup({
   on_attach = on_attach,
   capabilities = capabilities,
   servers = {
-    sumneko_lua = {
+    lua_ls = {
       settings = {
         Lua = {
           diagnostics = {
-            globals = { 'vim' }
+            globals = {
+              "vim"
+            }
           }
         }
       }

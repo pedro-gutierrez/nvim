@@ -24,10 +24,11 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'L3MON4D3/LuaSnip'
 
-  use { 'nvim-treesitter/nvim-treesitter',
-    commit = 'addc129a4f272aba0834bd0a7b6bd4ad5d8c801b',
-    lock = true,
-    run = ':TSUpdate' }
+  use({
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    after = "nvim-treesitter",
+    requires = "nvim-treesitter/nvim-treesitter",
+  })
 
   require("project_nvim").setup {}
 
@@ -52,9 +53,5 @@ return require('packer').startup(function(use)
   vim.g['test#strategy'] = 'neovim'
   vim.g['test#neovim#term_position'] = 'bot'
 
-
-  -- these will only be used by my iterm
-  use 'navarasu/onedark.nvim'
   use 'nvim-lualine/lualine.nvim'
-  use 'ellisonleao/gruvbox.nvim'
 end)
