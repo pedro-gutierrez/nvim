@@ -47,11 +47,4 @@ return require('packer').startup(function(use)
   -- illuminate
   use 'rrethy/vim-illuminate'
   require('illuminate').configure {}
-
-  -- testing
-  use 'vim-test/vim-test'
-  vim.g['test#strategy'] = 'neovim'
-  vim.g['test#neovim#term_position'] = 'bot'
-
-  use 'nvim-lualine/lualine.nvim'
 end)

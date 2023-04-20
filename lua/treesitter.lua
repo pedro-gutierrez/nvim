@@ -16,6 +16,5 @@ require 'nvim-treesitter.configs'.setup {
   textobjects = { enable = true },
 }
 
-vim.api.nvim_set_hl(0, "@variable.elixir", { link = "None" })
-vim.api.nvim_set_hl(0, "@symbol.elixir", { link = "String" })
--- vim.cmd [[highlight! link TSSymbol TSConstant]]
+vim.api.nvim_set_hl(0, "@variable", { link = "None" })
+vim.api.nvim_set_hl(0, "@symbol", { link = "Constant" })
