@@ -31,7 +31,7 @@ opt.shortmess:append("c")
 opt.wrap = true
 opt.clipboard:append("unnamedplus")
 opt.cursorline = true
-opt.textwidth = 120
+opt.textwidth = 100
 opt.laststatus = 2
 opt.timeoutlen = 300
 opt.completeopt = { 'menu', 'menuone', 'noselect' }

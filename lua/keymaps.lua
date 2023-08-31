@@ -11,7 +11,7 @@ vim.g.mapleader = " "
 map('t', '<Esc>', '<C-\\><C-n>')
 map('n', ';', ':')
 map('n', '<tab><tab>', '<C-w><C-w>')
-map('n', '<Leader>p', ':Files<CR>')
+map('n', '<Leader>f', ':Files<CR>')
 map('n', '<Leader>s', 'yaw :Ag <C-R>"<CR>')
 map('n', '<Leader>b', ':Buffers<CR>')
 map('n', '<Leader>v', ':VerticalSplit<CR><C-w><C-w>')
