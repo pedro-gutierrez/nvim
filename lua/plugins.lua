@@ -10,6 +10,7 @@ return require('packer').startup(function(use)
   use "junnplus/lsp-setup.nvim"
   use "williamboman/mason.nvim"
   use "williamboman/mason-lspconfig.nvim"
+  use "lukas-reineke/lsp-format.nvim"
   use "neovim/nvim-lspconfig"
   use "junegunn/fzf"
   use "junegunn/fzf.vim"

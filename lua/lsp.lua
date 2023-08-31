@@ -1,5 +1,8 @@
+require("lsp-format").setup {}
+
 local on_attach = function(client, _)
-  require('lsp-setup.utils').format_on_save(client)
+  -- require('lsp-setup.utils').format_on_save(client)
+  require("lsp-format").on_attach(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -24,11 +27,14 @@ end
 
 vim.cmd [[autocmd DiagnosticChanged * :lua Quickfixlist()]]
 
+require 'lspconfig'.solargraph.setup {}
+
 require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = {
     'elixirls',
-    'sorbet',
+    'solargraph',
+    'lua_ls'
   }
 })
 
