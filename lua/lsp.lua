@@ -1,8 +1,10 @@
-require("lsp-format").setup {}
+local lspformat = require('lsp-format')
+local lspconfig = require('lspconfig')
+
+lspformat.setup {}
 
 local on_attach = function(client, _)
-  -- require('lsp-setup.utils').format_on_save(client)
-  require("lsp-format").on_attach(client)
+  lspformat.on_attach(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -27,8 +29,6 @@ end
 
 vim.cmd [[autocmd DiagnosticChanged * :lua Quickfixlist()]]
 
-require 'lspconfig'.solargraph.setup {}
-
 require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = {
@@ -38,30 +38,35 @@ require("mason-lspconfig").setup({
   }
 })
 
-require('lsp-setup').setup({
-  default_mappings = true,
+
+lspconfig.solargraph.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  servers = {
-    lua_ls = {
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = {
-              "vim"
-            }
-          }
-        }
-      }
-    },
-    elixirls = {
-      settings = {
-        elixirLS = {
-          mixTarget = 'dev',
-          dialyzerEnabled = false,
-          fetchDeps = false
+
+}
+
+lspconfig.lua_ls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = {
+          "vim"
         }
       }
     }
   }
-})
+}
+
+lspconfig.elixirls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    elixirLS = {
+      mixTarget = 'dev',
+      dialyzerEnabled = false,
+      fetchDeps = false
+    }
+  }
+}

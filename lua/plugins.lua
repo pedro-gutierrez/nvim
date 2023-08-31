@@ -7,7 +7,6 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'tpope/vim-fugitive'
   use 'ahmedkhalf/project.nvim'
-  use "junnplus/lsp-setup.nvim"
   use "williamboman/mason.nvim"
   use "williamboman/mason-lspconfig.nvim"
   use "lukas-reineke/lsp-format.nvim"
