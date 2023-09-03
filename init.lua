@@ -1,5 +1,6 @@
 require("options")
 require("plugins")
+require("indent")
 require("highlight")
 require("commands")
 require("fzf")

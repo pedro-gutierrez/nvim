@@ -47,4 +47,6 @@ return require('packer').startup(function(use)
   -- illuminate
   use 'rrethy/vim-illuminate'
   require('illuminate').configure {}
+
+  use "lukas-reineke/indent-blankline.nvim"
 end)
