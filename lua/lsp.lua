@@ -20,7 +20,7 @@ vim.lsp.handlers[h] = vim.lsp.with(
     underline = true,
     virtual_text = false,
     signs = true,
-    update_in_insert = true
+    update_in_insert = false
   })
 
 function Quickfixlist()
