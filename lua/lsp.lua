@@ -18,9 +18,9 @@ local h = 'textDocument/publishDiagnostics'
 vim.lsp.handlers[h] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
-    virtual_text = false,
+    virtual_text = true,
     signs = true,
-    update_in_insert = false
+    update_in_insert = true
   })
 
 function Quickfixlist()
