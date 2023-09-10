@@ -1,5 +1,6 @@
 local lspformat = require('lsp-format')
 local lspconfig = require('lspconfig')
+local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
 lspformat.setup {}
 
@@ -7,7 +8,11 @@ local on_attach = function(client, _)
   lspformat.on_attach(client)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = vim.tbl_extend(
+  'force',
+  vim.lsp.protocol.make_client_capabilities(),
+  cmp_nvim_lsp.default_capabilities()
+)
 
 local h = 'textDocument/publishDiagnostics'
 vim.lsp.handlers[h] = vim.lsp.with(
@@ -34,7 +39,7 @@ require("mason-lspconfig").setup({
   ensure_installed = {
     'elixirls',
     'solargraph',
-    'lua_ls'
+    'lua_ls',
   }
 })
 
