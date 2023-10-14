@@ -25,30 +25,11 @@ return require('packer').startup(function(use)
   use 'ray-x/cmp-treesitter'
   use 'L3MON4D3/LuaSnip'
   use 'navarasu/onedark.nvim'
-
   use({
     "nvim-treesitter/nvim-treesitter-textobjects",
     after = "nvim-treesitter",
     requires = "nvim-treesitter/nvim-treesitter",
   })
-
-  require("project_nvim").setup {}
-
-  require('nvim-search-and-replace').setup({
-    ignore = {
-      '**/node_modules/**',
-      '**/.git/**',
-      '**/.gitignore',
-      '**/.gitmodules',
-      '**/build/**',
-      '**/deps/**',
-      '**/_build/**'
-    }
-  })
-
-  -- illuminate
   use 'rrethy/vim-illuminate'
-  require('illuminate').configure {}
-
   use "lukas-reineke/indent-blankline.nvim"
 end)

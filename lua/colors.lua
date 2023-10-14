@@ -1,3 +1,5 @@
+require('illuminate').configure {}
+
 vim.g.indent_blankline_char = "┊"
 vim.cmd [[set fillchars+=vert:\|]]
 vim.cmd [[hi VertSplit cterm=NONE]]

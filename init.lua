@@ -1,5 +1,7 @@
 require("options")
 require("plugins")
+require("project")
+require("search")
 require("colors")
 require("commands")
 require("fzf")
