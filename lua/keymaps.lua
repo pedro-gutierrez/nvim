@@ -11,6 +11,7 @@ vim.g.mapleader = " "
 map('t', '<Esc>', '<C-\\><C-n>')
 map('n', ';', ':')
 map('n', '<tab><tab>', '<C-w><C-w>')
+map('n', '<Leader>a', ':Ag ')
 map('n', '<Leader>f', ':Files<CR>')
 map('n', '<Leader>s', 'yaw :Ag <C-R>"<CR>')
 map('n', '<Leader>b', ':Buffers<CR>')
