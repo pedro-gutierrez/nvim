@@ -1,5 +1,3 @@
-vim.cmd [[highlight IndentBlanklineIndent1 ctermfg=lightgray cterm=none]]
-
 require("ibl").setup {
   exclude = {
     filetypes = { "startify" },
@@ -8,7 +6,7 @@ require("ibl").setup {
   indent = {
     char = "|",
     highlight = {
-      "IndentBlanklineIndent1",
+      "NonText",
     }
   },
   scope = { enabled = false }

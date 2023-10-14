@@ -24,6 +24,7 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'ray-x/cmp-treesitter'
   use 'L3MON4D3/LuaSnip'
+  use 'navarasu/onedark.nvim'
 
   use({
     "nvim-treesitter/nvim-treesitter-textobjects",
