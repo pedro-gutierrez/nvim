@@ -31,5 +31,4 @@ return require('packer').startup(function(use)
     requires = "nvim-treesitter/nvim-treesitter",
   })
   use 'rrethy/vim-illuminate'
-  use "lukas-reineke/indent-blankline.nvim"
 end)
