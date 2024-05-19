@@ -69,7 +69,7 @@ lspconfig.elixirls.setup {
   capabilities = capabilities,
   settings = {
     elixirLS = {
-      mixTarget = 'dev',
+      mixTarget = 'test',
       dialyzerEnabled = false,
       fetchDeps = true
     }
