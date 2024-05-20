@@ -4,7 +4,6 @@ local opt = vim.opt
 opt.updatetime = 250
 opt.background = "light"
 opt.hidden = true
-opt.number = true
 opt.expandtab = true
 opt.tabstop = 2
 opt.shiftwidth = 2
@@ -28,14 +27,19 @@ opt.errorbells = false
 opt.backup = false
 opt.swapfile = false
 opt.shortmess:append("c")
-opt.wrap = true
 opt.clipboard:append("unnamedplus")
 opt.cursorline = true
-opt.textwidth = 100
 opt.laststatus = 2
 opt.timeoutlen = 300
 opt.completeopt = { 'menu', 'menuone', 'noselect' }
 opt.mouse = "c"
 
-local win = vim.wo
-win.wrap = false
+-- Soft wrap text at 100
+opt.number = true
+opt.textwidth = 100
+opt.wrapmargin = 0
+opt.wrap = true
+opt.linebreak = true
+
+--local win = vim.wo
+--win.wrap = false
