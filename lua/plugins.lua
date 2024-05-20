@@ -3,6 +3,13 @@
 -- git clone --depth 1 https://github.com/wbthomason/packer.nvim \
 --    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 --
+-- Markdown preview initial installation:
+-- export NODE_OPTIONS=--openssl-legacy-provider
+-- cd ~/.local/share/nvim/site/pack/packer/start/
+-- git clone https://github.com/iamcco/markdown-preview.nvim.git
+-- cd markdown-preview.nvim
+-- npx --yes yarn install
+-- npx --yes yarn build
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'tpope/vim-fugitive'
@@ -31,4 +38,5 @@ return require('packer').startup(function(use)
     requires = "nvim-treesitter/nvim-treesitter",
   })
   use 'rrethy/vim-illuminate'
+  use 'iamcco/markdown-preview.nvim'
 end)
