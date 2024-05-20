@@ -11,6 +11,7 @@ vim.cmd [[hi NonText ctermfg=lightgray cterm=none gui=none]]
 
 -- restore the legacy colorscheme in 0.10
 if vim.fn.has('nvim-0.10') == 1 then
+  vim.cmd [[hi Visual ctermbg=7 ctermfg=none]]
   vim.cmd [[hi SignColumn ctermfg=4 ctermbg=248]]
   vim.cmd [[hi LineNr ctermfg=130 ]]
   vim.cmd [[hi CursorLineNr ctermfg=130]]
