@@ -23,7 +23,7 @@ if vim.fn.has('nvim-0.10') == 1 then
   vim.cmd [[hi Constant ctermfg=1]]
   vim.cmd [[hi String ctermfg=1]]
   vim.cmd [[hi Operator ctermfg=130]]
-  vim.cmd [[hi Special ctermfg=5]]
+  vim.cmd [[hi Special ctermfg=1]]
   vim.cmd [[hi Delimiter ctermfg=5 cterm=none]]
   vim.cmd [[hi MatchParen ctermbg=14 cterm=none]]
   vim.cmd [[hi Directory ctermfg=4]]
