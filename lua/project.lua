@@ -1,1 +1,2 @@
-require("project_nvim").setup {}
+require("oil").setup {}
+require("nvim-rooter").setup()

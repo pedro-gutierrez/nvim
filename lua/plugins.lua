@@ -13,7 +13,6 @@
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'tpope/vim-fugitive'
-  use 'ahmedkhalf/project.nvim'
   use "williamboman/mason.nvim"
   use "williamboman/mason-lspconfig.nvim"
   use "lukas-reineke/lsp-format.nvim"
@@ -41,4 +40,5 @@ return require('packer').startup(function(use)
   use 'iamcco/markdown-preview.nvim'
 
   use 'stevearc/oil.nvim'
+  use 'notjedi/nvim-rooter.lua'
 end)
