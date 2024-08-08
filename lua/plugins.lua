@@ -39,4 +39,6 @@ return require('packer').startup(function(use)
   })
   use 'rrethy/vim-illuminate'
   use 'iamcco/markdown-preview.nvim'
+
+  use 'stevearc/oil.nvim'
 end)
