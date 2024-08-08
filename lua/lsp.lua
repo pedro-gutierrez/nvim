@@ -37,7 +37,7 @@ vim.cmd [[autocmd DiagnosticChanged * :lua Quickfixlist()]]
 require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = {
-    'elixirls',
+    --    'elixirls',
     'solargraph',
     'lua_ls',
   }
@@ -64,14 +64,29 @@ lspconfig.lua_ls.setup {
   }
 }
 
-lspconfig.elixirls.setup {
+--lspconfig.elixirls.setup {
+--  on_attach = on_attach,
+--  capabilities = capabilities,
+--  settings = {
+--    elixirLS = {
+--      mixTarget = 'test',
+--      dialyzerEnabled = false,
+--      fetchDeps = true
+--    }
+--  }
+--}
+
+
+lspconfig.nextls.setup {
+  cmd = { "nextls", "--stdio" },
   on_attach = on_attach,
   capabilities = capabilities,
-  settings = {
-    elixirLS = {
-      mixTarget = 'test',
-      dialyzerEnabled = false,
-      fetchDeps = true
+  init_options = {
+    extensions = {
+      credo = { enable = true }
+    },
+    experimental = {
+      completions = { enable = true }
     }
   }
 }
