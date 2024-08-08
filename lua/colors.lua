@@ -33,6 +33,8 @@ if vim.fn.has('nvim-0.10') == 1 then
   vim.cmd [[hi Pmenu ctermfg=0 ctermbg=225 cterm=none]]
   vim.cmd [[hi PmenuSel ctermfg=0 ctermbg=7 cterm=none]]
   vim.cmd [[hi NormalFloat ctermfg=0 ctermbg=225 cterm=none]]
+  vim.cmd [[hi Search ctermbg=11 ctermfg=none]]
+  vim.cmd [[hi CurSearch ctermbg=11 ctermfg=none]]
 end
 
 -- overrides for terminals I use in dark mode
