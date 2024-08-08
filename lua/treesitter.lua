@@ -8,7 +8,8 @@ require 'nvim-treesitter.configs'.setup {
     "javascript",
     "yaml",
     "hcl",
-    "ruby"
+    "ruby",
+    "liquid"
   },
   highlight = { enable = true },
   indent = { enable = true },
