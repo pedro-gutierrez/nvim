@@ -32,7 +32,7 @@ opt.cursorline = true
 opt.laststatus = 2
 opt.timeoutlen = 300
 opt.completeopt = { 'menu', 'menuone', 'noselect' }
-opt.mouse = "c"
+opt.mouse = "a"
 
 -- Soft wrap text at 100
 opt.number = true
