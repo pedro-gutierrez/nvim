@@ -25,10 +25,11 @@ vim.lsp.handlers[h] = vim.lsp.with(
 
 function Quickfixlist()
   local current = vim.api.nvim_get_current_win()
-  vim.diagnostic.setqflist()
-  vim.cmd('cwindow')
-  if next(vim.diagnostic.get()) then
-    vim.fn.win_gotoid(current)
+  if pcall(vim.diagnostic.setqflist) then
+    vim.cmd('cwindow')
+    if next(vim.diagnostic.get()) then
+      vim.fn.win_gotoid(current)
+    end
   end
 end
 
@@ -82,6 +83,7 @@ lspconfig.nextls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   init_options = {
+    mix_env = "dev",
     extensions = {
       credo = { enable = true }
     },
