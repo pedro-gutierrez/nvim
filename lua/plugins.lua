@@ -41,4 +41,9 @@ return require('packer').startup(function(use)
 
   use 'stevearc/oil.nvim'
   use 'notjedi/nvim-rooter.lua'
+
+  -- Requires the following git editor config setting
+  -- [core]
+  --   editor = ~/.nvim/0.10.1/bin/nvim --cmd 'let g:unception_block_while_host_edits=1'
+  use "samjwill/nvim-unception"
 end)
