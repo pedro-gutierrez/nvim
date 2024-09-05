@@ -78,17 +78,17 @@ lspconfig.lua_ls.setup {
 --}
 
 
-lspconfig.nextls.setup {
-  cmd = { "nextls", "--stdio" },
-  on_attach = on_attach,
-  capabilities = capabilities,
-  init_options = {
-    mix_env = "dev",
-    extensions = {
-      credo = { enable = true }
-    },
-    experimental = {
-      completions = { enable = true }
-    }
-  }
-}
+--lspconfig.nextls.setup {
+--  cmd = { "nextls", "--stdio" },
+--  on_attach = on_attach,
+--  capabilities = capabilities,
+--  init_options = {
+--    mix_env = "test",
+--    extensions = {
+--      credo = { enable = true }
+--    },
+--    experimental = {
+--      completions = { enable = true }
+--    }
+--  }
+--}
