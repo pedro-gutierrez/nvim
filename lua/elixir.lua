@@ -7,17 +7,17 @@ local function multiline(pattern, headline, lines, startPosition, errors)
   for i = startPosition, #lines do
     local line = lines[i]
 
-    local _pre, file1, ln1, col1 = line:match(modernEndingLineWithCol)
-    local _pre, file2, ln2 = line:match(modernEndingLineWithoutCol)
-    local _blank, file3, ln3, col2 = line:match(classicEndingLineWithCol)
-    local _blank, file4, ln4 = line:match(classicEndingLineWithoutCol)
+    local _, file1, ln1, col1 = line:match(modernEndingLineWithCol)
+    local _, file2, ln2 = line:match(modernEndingLineWithoutCol)
+    local _, file3, ln3, col2 = line:match(classicEndingLineWithCol)
+    local _, file4, ln4 = line:match(classicEndingLineWithoutCol)
 
     local file = file1 or file2 or file3 or file4
     local ln = ln1 or ln2 or ln3 or ln4
-    local col = col1 or col2 or col3 or col4 or 0
+    local col = col1 or col2 or 0
 
     if file and ln then
-      table.insert(errors, { kind = pattern.kind, file = file, line = ln, col = 0, message = headline })
+      table.insert(errors, { kind = pattern.kind, file = file, line = ln, col = col, message = headline })
       return
     end
   end
@@ -28,10 +28,10 @@ local function search_hint(lines, startPosition)
   local hintPattern = "(%s+)HINT: (.+)"
   for i = startPosition, #lines do
     local line = lines[i]
-    local padding, hintText = line:match(hintPattern)
+    local _, hintText = line:match(hintPattern)
     if hintText then
       local hint = { message = hintText, ln = nil }
-      local pre, newLineNum, post = hintText:match("(.+)line (%d+)(.+)")
+      local _, newLineNum, _ = hintText:match("(.+)line (%d+)(.+)")
       if newLineNum then
         hint.ln = newLineNum
       end
@@ -53,7 +53,7 @@ local function missingToken(pattern, headline, lines, startPosition, errors)
   end
 end
 
-local function compileError(pattern, headline, _lines, _startPosition, errors)
+local function compileError(pattern, headline, _, _, errors)
   local patternWithCol = "(.+):(%d+):(%d+): (.+)"
   local patternWithoutCol = "(.+):(%d+): (.+)"
 
