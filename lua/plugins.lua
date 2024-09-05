@@ -46,4 +46,6 @@ return require('packer').startup(function(use)
   -- [core]
   --   editor = ~/.nvim/0.10.1/bin/nvim --cmd 'let g:unception_block_while_host_edits=1'
   use "samjwill/nvim-unception"
+
+  use "robitx/gp.nvim"
 end)
