@@ -1,8 +1,8 @@
 local function multiline(pattern, headline, lines, startPosition, errors)
-  local modernEndingLineWithCol = "(%s+)└─ (.+):(%d+):(%d+): (.+)"
-  local modernEndingLineWithoutCol = "(%s+)└─ (.+):(%d+): (.+)"
-  local classicEndingLineWithCol = "(%s+)(.+):(%d+):(%d+): (.+)"
-  local classicEndingLineWithoutCol = "(%s+)(.+):(%d+): (.+)"
+  local modernEndingLineWithCol = "(%s+)└─ (.+):(%d+):(%d+):(.+)"
+  local modernEndingLineWithoutCol = "(%s+)└─ (.+):(%d+):(.+)"
+  local classicEndingLineWithCol = "(%s+)(.+):(%d+):(%d+):(.+)"
+  local classicEndingLineWithoutCol = "(%s+)(.+):(%d+):(.+)"
 
   for i = startPosition, #lines do
     local line = lines[i]
