@@ -1,3 +1,30 @@
+local function close_buffer()
+  -- Get the current buffer number
+  local bufnr = vim.api.nvim_get_current_buf()
+
+  -- Check if the buffer is modified (has unsaved changes)
+  if vim.api.nvim_buf_get_option(bufnr, 'modified') then
+    -- Display a custom error message if there are unsaved changes
+    vim.api.nvim_err_writeln('Error: Buffer has unsaved changes. Please save or discard changes before closing.')
+    return
+  end
+
+  -- Get a list of all windows displaying this buffer
+  local wins = vim.fn.getbufinfo(bufnr)[1].windows
+
+  -- If there is only one window showing the buffer, create a new empty buffer first
+  if #wins == 1 then
+    vim.cmd('enew')              -- Create a new empty buffer
+    vim.cmd('bdelete ' .. bufnr) -- Delete the original buffer
+  else
+    -- Close the buffer without closing the window by using :bdelete
+    vim.cmd('bdelete ' .. bufnr)
+  end
+end
+
+
+vim.api.nvim_create_user_command('CloseBuffer', close_buffer, {})
+
 vim.cmd [[autocmd BufWritePre * %s/\s\+$//e]]
 vim.cmd [[autocmd TermOpen * set nonu]]
 vim.cmd [[autocmd TermOpen * startinsert]]
