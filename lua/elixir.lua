@@ -143,14 +143,15 @@ end
 local function print_output(output)
   local errors = parse(output)
   local text = table.concat(output, "\n")
+  local cwd = vim.fn.getcwd()
   if has_errors(text) then
     vim.api.nvim_err_write(text)
     if #errors > 0 then
-      print("Found " .. #errors .. " error(s)")
+      print("Found " .. #errors .. " error(s) in " .. cwd)
       show_in_quickfix(errors)
     end
   else
-    print("No errors found")
+    print("No errors found in " .. cwd)
     vim.cmd('silent! edit')
     vim.cmd('cclose')
   end
