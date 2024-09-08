@@ -9,8 +9,24 @@ vim.cmd [[hi CursorLine ctermbg=none]]
 vim.cmd [[hi IlluminatedWordRead cterm=none ctermbg=lightyellow]]
 vim.cmd [[hi NonText ctermfg=lightgray cterm=none gui=none]]
 
--- restore the legacy colorscheme in 0.10
-if vim.fn.has('nvim-0.10') == 1 then
+-- overrides for terminals I use in dark mode
+if os.getenv("TERM_PROGRAM") ~= "Apple_Terminal" then
+  vim.opt.background = "dark"
+  vim.cmd [[hi SignColumn ctermbg=none guibg=none]]
+  vim.cmd [[hi IlluminatedWordRead cterm=bold ctermbg=none gui=underline]]
+  vim.cmd [[hi NonText cterm=none gui=none]]
+
+  vim.opt.background = "dark"
+
+  vim.cmd [[
+  highlight Normal guibg=none
+  highlight NonText guibg=none
+
+  " Optional: Set specific UI elements to transparent if needed
+  " highlight LineNr guibg=none
+  " highlight SignColumn guibg=none
+  ]]
+else
   vim.cmd [[hi Visual ctermbg=7 ctermfg=none]]
   vim.cmd [[hi SignColumn ctermfg=4 ctermbg=248]]
   vim.cmd [[hi LineNr ctermfg=130 ]]
@@ -35,25 +51,4 @@ if vim.fn.has('nvim-0.10') == 1 then
   vim.cmd [[hi NormalFloat ctermfg=0 ctermbg=225 cterm=none]]
   vim.cmd [[hi Search ctermbg=11 ctermfg=none]]
   vim.cmd [[hi CurSearch ctermbg=11 ctermfg=none]]
-end
-
--- overrides for terminals I use in dark mode
-if os.getenv("TERM_PROGRAM") ~= "Apple_Terminal" then
-  vim.opt.background = "dark"
-  vim.cmd [[hi SignColumn ctermbg=none guibg=none]]
-  vim.cmd [[hi IlluminatedWordRead cterm=bold ctermbg=none gui=underline]]
-  vim.cmd [[hi NonText cterm=none gui=none]]
-
-  require('onedark').setup {
-    transparent = true,
-    code_style = {
-      comments = 'none'
-    },
-    diagnostics = {
-      darker = true
-    }
-  }
-
-
-  require('onedark').load()
 end
