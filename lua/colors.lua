@@ -3,29 +3,26 @@ require('illuminate').configure {}
 vim.g.indent_blankline_char = "┊"
 vim.cmd [[set fillchars+=vert:\|]]
 vim.cmd [[hi VertSplit cterm=NONE]]
-vim.cmd [[hi CursorLine cterm=none term=none]]
-vim.cmd [[hi CursorLineNr cterm=none term=none]]
+vim.cmd [[hi CursorLine cterm=none term=none gui=none]]
+vim.cmd [[hi CursorLineNr cterm=none term=none gui=none]]
 vim.cmd [[hi CursorLine ctermbg=none]]
 vim.cmd [[hi IlluminatedWordRead cterm=none ctermbg=lightyellow]]
 vim.cmd [[hi NonText ctermfg=lightgray cterm=none gui=none]]
 
--- overrides for terminals I use in dark mode
 if os.getenv("TERM_PROGRAM") ~= "Apple_Terminal" then
   vim.opt.background = "dark"
-  vim.cmd [[hi SignColumn ctermbg=none guibg=none]]
-  vim.cmd [[hi IlluminatedWordRead cterm=bold ctermbg=none gui=underline]]
-  vim.cmd [[hi NonText cterm=none gui=none]]
-
-  vim.opt.background = "dark"
-
-  vim.cmd [[
-  highlight Normal guibg=none
-  highlight NonText guibg=none
-
-  " Optional: Set specific UI elements to transparent if needed
-  " highlight LineNr guibg=none
-  " highlight SignColumn guibg=none
-  ]]
+  vim.cmd [[hi CursorLine guibg=NvimDarkGrey3]]
+  vim.cmd [[hi SignColumn guibg=NvimDarkGrey3]]
+  vim.cmd [[hi LineNr guibg=none]]
+  vim.cmd [[hi IlluminatedWordRead gui=underline]]
+  vim.cmd [[hi NonText guifg=NvimDarkGrey3]]
+  vim.cmd [[hi WinSeparator guifg=NvimDarkGrey3]]
+  vim.cmd [[hi StatusLine guifg=NvimLightGray3 guibg=NvimDarkGrey3]]
+  vim.cmd [[hi StatusLineNC guifg=gray guibg=NvimDarkGrey3]]
+  vim.cmd [[hi Normal guibg=none]]
+  vim.cmd [[hi GitGutterAdd guifg=#009900]]
+  vim.cmd [[hi GitGutterChange guifg=#bbbb00]]
+  vim.cmd [[hi GitGutterDelete guifg=#ff2222]]
 else
   vim.cmd [[hi Visual ctermbg=7 ctermfg=none]]
   vim.cmd [[hi SignColumn ctermfg=4 ctermbg=248]]
