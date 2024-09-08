@@ -30,22 +30,63 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'ray-x/cmp-treesitter'
   use 'L3MON4D3/LuaSnip'
-  use 'navarasu/onedark.nvim'
+
   use({
     "nvim-treesitter/nvim-treesitter-textobjects",
     after = "nvim-treesitter",
     requires = "nvim-treesitter/nvim-treesitter",
   })
   use 'rrethy/vim-illuminate'
-  use 'iamcco/markdown-preview.nvim'
 
+  --- Project management
   use 'stevearc/oil.nvim'
   use 'notjedi/nvim-rooter.lua'
 
+  -- Run neovim from inside a neovim terminal
   -- Requires the following git editor config setting
   -- [core]
   --   editor = ~/.nvim/0.10.1/bin/nvim --cmd 'let g:unception_block_while_host_edits=1'
   use "samjwill/nvim-unception"
 
+  -- Markdown
+  use 'iamcco/markdown-preview.nvim'
+
+  use({
+    'MeanderingProgrammer/render-markdown.nvim',
+    after = { 'nvim-treesitter' },
+    requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
+    -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
+    -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+    config = function()
+      require('render-markdown').setup({
+        file_types = { "markdown", "Avante" }
+      })
+      require('render-markdown').enable()
+    end,
+  })
+
+  -- AI plugins and their dependencies
   use "robitx/gp.nvim"
+  use {
+    'yetone/avante.nvim',
+    requires = {
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "HakonHarnes/img-clip.nvim",
+      "zbirenbaum/copilot.lua"
+
+    },
+    build = function()
+      vim.cmd('!cd ~/.local/share/nvim/site/pack/packer/start/avante.nvim && make')
+    end,
+    config = function()
+      require('avante').setup()
+    end
+  }
+
+  -- dark colorschemes
+  use 'navarasu/onedark.nvim'
+  use 'rose-pine/neovim'
 end)
