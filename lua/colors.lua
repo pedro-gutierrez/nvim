@@ -61,6 +61,7 @@ if use_dark_theme() then
   vim.cmd [[hi Visual ctermbg=darkgray ctermfg=none]]
   vim.cmd [[hi @module.elixir ctermfg=110]]
   vim.cmd [[hi ErrorMsg cterm=none ctermfg=1 ctermbg=none]]
+  vim.cmd [[hi Title cterm=none ctermfg=183 ctermbg=none]]
 else
   vim.cmd [[hi Visual ctermbg=7 ctermfg=none]]
   vim.cmd [[hi SignColumn ctermfg=4 ctermbg=248]]
