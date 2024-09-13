@@ -42,16 +42,16 @@ if use_dark_theme() then
     colorscheme quiet
     hi SignColumn ctermbg=none
     hi CursorLine cterm=none ctermbg=none gui=none
-    hi Function ctermfg=gray
+    hi Function ctermfg=white
     hi Identifier ctermfg=white
-    hi Delimiter ctermfg=darkgray
-    hi Special ctermfg=lightgray
+    hi Delimiter ctermfg=lightgray
+    hi Special ctermfg=gray
     hi Statement ctermfg=gray
     hi Type ctermfg=gray
-    hi Constant ctermfg=8
+    hi Constant ctermfg=gray
     hi Operator ctermfg=darkgray
     hi @module.elixir ctermfg=white
-    hi @variable.elixir ctermfg=lightgray
+    hi @variable.elixir ctermfg=white
     hi Search ctermbg=darkgray
     hi IlluminatedWordRead cterm=underline ctermbg=none
     hi MatchParen ctermbg=lightgray cterm=none ctermfg=none
