@@ -38,30 +38,33 @@ vim.cmd [[hi NonText ctermfg=lightgray cterm=none gui=none]]
 
 if use_dark_theme() then
   vim.opt.background = "dark"
-  vim.cmd [[colorscheme habamax]]
-  vim.cmd [[hi CursorLine ctermbg=none]]
-  vim.cmd [[hi SignColumn ctermbg=240]]
-  vim.cmd [[hi LineNr ctermbg=none ctermfg=240]]
-  vim.cmd [[hi CursorLineNr ctermbg=none ctermfg=white]]
-  vim.cmd [[hi IlluminatedWordRead cterm=underline ctermbg=none]]
-  vim.cmd [[hi NonText ctermfg=240]]
-  vim.cmd [[hi WinSeparator ctermbg=none ctermfg=240]]
-  vim.cmd [[hi Normal ctermbg=none]]
-  vim.cmd [[hi GitGutterAdd ctermfg=108]]
-  vim.cmd [[hi GitGutterChange ctermfg=3]]
-  vim.cmd [[hi GitGutterDelete ctermfg=1]]
-  vim.cmd [[hi Function ctermfg=153]]
-  vim.cmd [[hi Identifier ctermfg=gray]]
-  vim.cmd [[hi QuickFixLine ctermbg=186]]
-  vim.cmd [[hi Search ctermbg=144]]
-  vim.cmd [[hi StatusLineNC ctermbg=none ctermfg=darkgray]]
-  vim.cmd [[hi StatusLine ctermbg=none ctermfg=darkgray]]
-  vim.cmd [[hi Delimiter ctermfg=130 cterm=none]]
-  vim.cmd [[hi Constant ctermfg=182]]
-  vim.cmd [[hi Visual ctermbg=darkgray ctermfg=none]]
-  vim.cmd [[hi @module.elixir ctermfg=110]]
-  vim.cmd [[hi ErrorMsg cterm=none ctermfg=1 ctermbg=none]]
-  vim.cmd [[hi Title cterm=none ctermfg=183 ctermbg=none]]
+  vim.cmd [[
+    colorscheme quiet
+    hi SignColumn ctermbg=none
+    hi CursorLine cterm=none ctermbg=none gui=none
+    hi Function ctermfg=gray
+    hi Identifier ctermfg=white
+    hi Delimiter ctermfg=darkgray
+    hi Special ctermfg=lightgray
+    hi Statement ctermfg=gray
+    hi Type ctermfg=gray
+    hi Constant ctermfg=8
+    hi Operator ctermfg=darkgray
+    hi @module.elixir ctermfg=white
+    hi @variable.elixir ctermfg=lightgray
+    hi Search ctermbg=darkgray
+    hi IlluminatedWordRead cterm=underline ctermbg=none
+    hi MatchParen ctermbg=lightgray cterm=none ctermfg=none
+    hi Visual ctermbg=white ctermfg=darkgray
+    hi StatusLine ctermbg=white ctermfg=black cterm=none
+    hi StatusLineNC ctermbg=white ctermfg=black cterm=none
+    hi ErrorMsg cterm=none ctermfg=1 ctermbg=none
+    hi Directory ctermfg=gray cterm=bold
+    hi Title ctermfg=darkgray cterm=none
+    hi QuickFixLine ctermbg=none ctermfg=gray cterm=none
+    hi Search ctermbg=darkgray ctermfg=none cterm=none
+    hi CurSearch ctermbg=lightyellow ctermfg=none cterm=none
+  ]]
 else
   vim.cmd [[hi Visual ctermbg=7 ctermfg=none]]
   vim.cmd [[hi SignColumn ctermfg=4 ctermbg=248]]
