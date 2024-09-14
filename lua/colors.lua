@@ -39,31 +39,23 @@ vim.cmd [[hi NonText ctermfg=lightgray cterm=none gui=none]]
 if use_dark_theme() then
   vim.opt.background = "dark"
   vim.cmd [[
-    colorscheme quiet
-    hi SignColumn ctermbg=none
-    hi CursorLine cterm=none ctermbg=none gui=none
-    hi Function ctermfg=white
-    hi Identifier ctermfg=white
-    hi Delimiter ctermfg=lightgray
-    hi Special ctermfg=gray
-    hi Statement ctermfg=gray
-    hi Type ctermfg=gray
-    hi Constant ctermfg=gray
-    hi Operator ctermfg=darkgray
-    hi @module.elixir ctermfg=white
-    hi @variable.elixir ctermfg=white
-    hi Search ctermbg=darkgray
+    colorscheme habamax
+    hi Normal ctermbg=none
+    hi Comment ctermfg=235
+    hi CursorLine ctermbg=none
+    hi StatusLine ctermbg=none ctermfg=lightgray cterm=bold
+    hi StatusLineNC ctermbg=none ctermfg=235 cterm=bold
     hi IlluminatedWordRead cterm=underline ctermbg=none
-    hi MatchParen ctermbg=lightgray cterm=none ctermfg=none
-    hi Visual ctermbg=white ctermfg=darkgray
-    hi StatusLine ctermbg=white ctermfg=black cterm=none
-    hi StatusLineNC ctermbg=white ctermfg=black cterm=none
     hi ErrorMsg cterm=none ctermfg=1 ctermbg=none
-    hi Directory ctermfg=gray cterm=bold
-    hi Title ctermfg=darkgray cterm=none
-    hi QuickFixLine ctermbg=none ctermfg=gray cterm=none
-    hi Search ctermbg=darkgray ctermfg=none cterm=none
-    hi CurSearch ctermbg=lightyellow ctermfg=none cterm=none
+    hi Title ctermfg=darkyellow cterm=none
+    hi SignColumn ctermbg=234
+    hi LineNr ctermfg=234
+    hi GitGutterAdd ctermfg=green
+    hi GitGutterChange ctermfg=darkyellow
+    hi GitGutterDelete ctermfg=1
+    hi WinSeparator ctermbg=none ctermfg=232
+    hi @markup.raw.markdown_inline ctermfg=lightred
+    "" hi Identifier ctermfg=lightgray
   ]]
 else
   vim.cmd [[hi Visual ctermbg=7 ctermfg=none]]
