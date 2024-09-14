@@ -35,6 +35,7 @@ map('n', 'K', ':lua vim.lsp.buf.hover()<CR>')
 map("n", "<Leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 map("n", "<Leader><Up>", "<PageUp>", { desc = "Move 10 lines up" })
 map("n", "<Leader><Down>", "<PageDown>", { desc = "Move 10 lines down" })
+map("n", "<Leader>c", ":%GpRewrite ", { desc = "Prompt chat gpt with the current buffer as context" })
 
 
 local function set_elixir_go_to_definition()

@@ -53,22 +53,4 @@ return require('packer').startup(function(use)
 
   -- AI plugins and their dependencies
   use "robitx/gp.nvim"
-  use {
-    'yetone/avante.nvim',
-    requires = {
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "HakonHarnes/img-clip.nvim",
-      "zbirenbaum/copilot.lua"
-
-    },
-    build = function()
-      vim.cmd('!cd ~/.local/share/nvim/site/pack/packer/start/avante.nvim && make')
-    end,
-    config = function()
-      require('avante').setup()
-    end
-  }
 end)
