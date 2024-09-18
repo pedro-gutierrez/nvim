@@ -1,5 +1,4 @@
 require("options")
-require("statusline")
 require("plugins")
 require("project")
 require("search")

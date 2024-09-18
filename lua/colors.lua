@@ -1,5 +1,9 @@
 require('illuminate').configure {}
 
+local function get_terminal()
+  return os.getenv("TERM_PROGRAM") or os.getenv("TERM") or ""
+end
+
 -- Here is the source of the `terminal_profile` script
 --#!/bin/bash
 --current_profile=$(osascript -e '
@@ -11,20 +15,25 @@ require('illuminate').configure {}
 --')
 --
 --echo "$current_profile"
-local function get_terminal_profile()
-  local result = vim.fn.system("terminal_profile")
-  result = vim.trim(result)
+local function get_terminal_profile(term)
+  if term == "Apple_Terminal" then
+    local result = vim.fn.system("terminal_profile")
+    result = vim.trim(result)
 
-  if vim.v.shell_error ~= 0 then
-    return "Basic"
+    if vim.v.shell_error ~= 0 then
+      return ""
+    end
+
+    return result
+  else
+    return ""
   end
-
-  return result
 end
 
-local function use_dark_theme()
-  return os.getenv("TERM_PROGRAM") ~= "Apple_Terminal" or get_terminal_profile() ~= "Basic"
-end
+
+local term = get_terminal()
+local term_profile = get_terminal_profile(term)
+
 
 vim.g.indent_blankline_char = "┊"
 vim.cmd [[set fillchars+=vert:\|]]
@@ -36,28 +45,32 @@ vim.cmd [[hi IlluminatedWordRead cterm=none ctermbg=lightyellow]]
 vim.cmd [[hi NonText ctermfg=lightgray cterm=none gui=none]]
 
 
-if use_dark_theme() then
+if term == 'Apple_Terminal' and term_profile == 'Pro' then
   vim.opt.background = "dark"
   vim.cmd [[
     colorscheme habamax
     hi Normal ctermbg=none
     hi Comment ctermfg=235
     hi CursorLine ctermbg=none
-    hi StatusLine ctermbg=none ctermfg=lightgray cterm=bold
-    hi StatusLineNC ctermbg=none ctermfg=235 cterm=bold
+    hi StatusLine ctermbg=235 ctermfg=white cterm=bold
+    hi StatusLineNC ctermbg=235 ctermfg=darkgray cterm=bold
     hi IlluminatedWordRead cterm=underline ctermbg=none
     hi ErrorMsg cterm=none ctermfg=1 ctermbg=none
     hi Title ctermfg=darkyellow cterm=none
-    hi SignColumn ctermbg=234
-    hi LineNr ctermfg=234
+    hi SignColumn ctermbg=235
+    hi LineNr ctermfg=235
     hi GitGutterAdd ctermfg=green
     hi GitGutterChange ctermfg=darkyellow
     hi GitGutterDelete ctermfg=1
-    hi WinSeparator ctermbg=none ctermfg=232
+    hi WinSeparator ctermbg=none ctermfg=235
     hi @markup.raw.markdown_inline ctermfg=lightred
-    "" hi Identifier ctermfg=lightgray
+    hi fzf1 ctermbg=235
+    hi fzf2 ctermbg=235
+    hi fzf3 ctermbg=235
   ]]
-else
+end
+
+if term == 'Apple_Terminal' and term_profile == 'Basic' then
   vim.cmd [[hi Visual ctermbg=7 ctermfg=none]]
   vim.cmd [[hi SignColumn ctermfg=4 ctermbg=248]]
   vim.cmd [[hi LineNr ctermfg=130 ]]
@@ -82,4 +95,24 @@ else
   vim.cmd [[hi NormalFloat ctermfg=0 ctermbg=225 cterm=none]]
   vim.cmd [[hi Search ctermbg=11 ctermfg=none]]
   vim.cmd [[hi CurSearch ctermbg=11 ctermfg=none]]
+end
+
+if term == 'iTerm.app' then
+  vim.opt.background = "dark"
+  vim.cmd [[
+    colorscheme solarized
+    hi ErrorMsg gui=none guifg=red guibg=none
+  ]]
+end
+
+if term == "xterm-kitty" then
+  vim.opt.background = "dark"
+  vim.cmd [[
+      hi CursorLine guibg=none
+      hi SignColumn guibg=NvimDarkGray3
+      hi LineNr guifg=NvimDarkGray4
+      hi WinSeparator guifg=NvimDarkGray4
+      hi StatusLine guibg=none guifg=NvimLightGray3
+      hi StatusLineNC guibg=none guifg=NvimDarkGray4
+    ]]
 end
