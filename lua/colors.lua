@@ -97,15 +97,7 @@ if term == 'Apple_Terminal' and term_profile == 'Basic' then
   vim.cmd [[hi CurSearch ctermbg=11 ctermfg=none]]
 end
 
-if term == 'iTerm.app' then
-  vim.opt.background = "dark"
-  vim.cmd [[
-    colorscheme solarized
-    hi ErrorMsg gui=none guifg=red guibg=none
-  ]]
-end
-
-if term == "xterm-kitty" then
+if term == "xterm-kitty" or term == 'iTerm.app' then
   vim.opt.background = "dark"
   vim.cmd [[
       hi CursorLine guibg=none
@@ -114,5 +106,6 @@ if term == "xterm-kitty" then
       hi WinSeparator guifg=NvimDarkGray4
       hi StatusLine guibg=none guifg=NvimLightGray3
       hi StatusLineNC guibg=none guifg=NvimDarkGray4
+      hi Title guifg=NvimLightGray3
     ]]
 end

@@ -73,6 +73,4 @@ return require('packer').startup(function(use)
       require('avante').setup()
     end
   }
-
-  use "ishan9299/nvim-solarized-lua"
 end)
