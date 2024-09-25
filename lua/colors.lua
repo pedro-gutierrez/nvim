@@ -45,30 +45,30 @@ vim.cmd [[hi IlluminatedWordRead cterm=none ctermbg=lightyellow]]
 vim.cmd [[hi NonText ctermfg=lightgray cterm=none gui=none]]
 
 
-if term == 'Apple_Terminal' and term_profile == 'Pro' then
-  vim.opt.background = "dark"
-  vim.cmd [[
-    colorscheme habamax
-    hi Normal ctermbg=none
-    hi Comment ctermfg=235
-    hi CursorLine ctermbg=none
-    hi StatusLine ctermbg=235 ctermfg=white cterm=bold
-    hi StatusLineNC ctermbg=235 ctermfg=darkgray cterm=bold
-    hi IlluminatedWordRead cterm=underline ctermbg=none
-    hi ErrorMsg cterm=none ctermfg=1 ctermbg=none
-    hi Title ctermfg=darkyellow cterm=none
-    hi SignColumn ctermbg=235
-    hi LineNr ctermfg=235
-    hi GitGutterAdd ctermfg=green
-    hi GitGutterChange ctermfg=darkyellow
-    hi GitGutterDelete ctermfg=1
-    hi WinSeparator ctermbg=none ctermfg=235
-    hi @markup.raw.markdown_inline ctermfg=lightred
-    hi fzf1 ctermbg=235
-    hi fzf2 ctermbg=235
-    hi fzf3 ctermbg=235
-  ]]
-end
+--if term == 'Apple_Terminal' and term_profile == 'Pro' then
+--  vim.opt.background = "dark"
+--  vim.cmd [[
+--    colorscheme habamax
+--    hi Normal ctermbg=none
+--    hi Comment ctermfg=235
+--    hi CursorLine ctermbg=none
+--    hi StatusLine ctermbg=235 ctermfg=white cterm=bold
+--    hi StatusLineNC ctermbg=235 ctermfg=darkgray cterm=bold
+--    hi IlluminatedWordRead cterm=underline ctermbg=none
+--    hi ErrorMsg cterm=none ctermfg=1 ctermbg=none
+--    hi Title ctermfg=darkyellow cterm=none
+--    hi SignColumn ctermbg=235
+--    hi LineNr ctermfg=235
+--    hi GitGutterAdd ctermfg=green
+--    hi GitGutterChange ctermfg=darkyellow
+--    hi GitGutterDelete ctermfg=1
+--    hi WinSeparator ctermbg=none ctermfg=235
+--    hi @markup.raw.markdown_inline ctermfg=lightred
+--    hi fzf1 ctermbg=235
+--    hi fzf2 ctermbg=235
+--    hi fzf3 ctermbg=235
+--  ]]
+--end
 
 if term == 'Apple_Terminal' and term_profile == 'Basic' then
   vim.cmd [[hi Visual ctermbg=7 ctermfg=none]]
@@ -97,15 +97,33 @@ if term == 'Apple_Terminal' and term_profile == 'Basic' then
   vim.cmd [[hi CurSearch ctermbg=11 ctermfg=none]]
 end
 
-if term == "xterm-kitty" or term == 'iTerm.app' then
+if term == "xterm-kitty" or term == 'iTerm.app' or term_profile == 'Pro' then
   vim.opt.background = "dark"
   vim.cmd [[
-      hi CursorLine guibg=none
-      hi SignColumn guibg=NvimDarkGray3
-      hi LineNr guifg=NvimDarkGray4
-      hi WinSeparator guifg=NvimDarkGray4
-      hi StatusLine guibg=none guifg=NvimLightGray3
-      hi StatusLineNC guibg=none guifg=NvimDarkGray4
-      hi Title guifg=NvimLightGray3
+      hi CursorLine guibg=none ctermbg=none
+      hi SignColumn guibg=NvimDarkGray3 ctermbg=none
+      hi LineNr guifg=NvimDarkGray4 ctermfg=darkgray
+      hi WinSeparator guifg=NvimDarkGray4 ctermfg=darkgray
+      hi StatusLine guibg=none guifg=NvimLightGray3 ctermfg=lightgray cterm=none
+      hi StatusLineNC guibg=none guifg=NvimDarkGray4 ctermfg=darkgray cterm=none
+      hi Title guifg=NvimLightGray3 ctermfg=lightgray
+      hi Comment ctermfg=darkgray
+      hi Statement cterm=bold ctermfg=lightgray
+      hi IlluminatedWordRead cterm=underline ctermbg=none
+      hi Type ctermfg=lightgray
+      hi Operator ctermfg=lightgray
+      hi Constant ctermfg=lightgray
+      hi Identifier ctermfg=117
+      hi String ctermfg=lightgreen
+      hi Function ctermfg=cyan
+      hi Pmenu ctermbg=darkgray cterm=none
+      hi visual ctermbg=lightgray
+      hi GitGutterAdd ctermfg=darkgreen
+      hi GitGutterChange ctermfg=darkyellow
+      hi GitGutterDelete ctermfg=red
+      hi fzf1 ctermbg=none cterm=none
+      hi fzf2 ctermbg=none cterm=none
+      hi fzf3 ctermbg=none cterm=none
+      hi Special ctermfg=117
     ]]
 end
